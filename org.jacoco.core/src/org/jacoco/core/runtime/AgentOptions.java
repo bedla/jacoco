@@ -15,6 +15,9 @@ package org.jacoco.core.runtime;
 import static java.lang.String.format;
 
 import java.io.File;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -225,7 +228,8 @@ public final class AgentOptions {
 				}
 
 				final String value = entry.substring(pos + 1);
-				setOption(key, value);
+				setOption(key,
+						URLDecoder.decode(value, StandardCharsets.UTF_8));
 			}
 
 			validateAll();
@@ -646,7 +650,8 @@ public final class AgentOptions {
 				if (sb.length() > 0) {
 					sb.append(',');
 				}
-				sb.append(key).append('=').append(value);
+				sb.append(key).append('=').append(
+						URLEncoder.encode(value, StandardCharsets.UTF_8));
 			}
 		}
 		return sb.toString();

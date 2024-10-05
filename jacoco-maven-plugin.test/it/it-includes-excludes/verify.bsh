@@ -12,8 +12,10 @@
  *******************************************************************************/
 import java.io.*;
 import org.codehaus.plexus.util.*;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
-String agentOptions = "excludes=**/FileUtil*:**/TestUtil*";
+String agentOptions = "excludes=" + URLEncoder.encode("**/FileUtil*:**/TestUtil*", StandardCharsets.UTF_8);
 
 String buildLog = FileUtils.fileRead( new File( basedir, "build.log" ) );
 if ( buildLog.indexOf( agentOptions ) < 0 ) {
